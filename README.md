@@ -22,7 +22,7 @@ Spatial Databases
 - With increasing surface air temperatures and the urban heat island effect, it is vital residents of Worcester have a user-friendly web-based dashboard to view live readings of air quality (measured by PM2.5) in their neighborhood.
 
 ## Proposed Workflow
-<img width="600px" src="\WorcesterAQ_Dashboard\Images\initial_workflowproposal.png" alt="workflow"></img>
+<img width="600px" src="Images\initial_workflowproposal.png" alt="workflow"></img>
 
 
 ### PurpleAir Python File 
