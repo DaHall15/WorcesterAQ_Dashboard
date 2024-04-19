@@ -92,7 +92,8 @@ Steps to making the data frame similar to PurpleAir:
 
 <img width="600px" src="Images\AirNOW_current_df.png" alt="workflow"></img>
 
-Similar to the PurpleAir dataframe - it is important to note the data frame is not yet in its final schema. Although, the data frame is now almost within 1NF. This is because all the cells contain indivisible values. Each column has a unique name. The order of the columns does not impact the data's integrity and each column contains values of a single type. THe columns of hour observed and date observed still need to be concatenated or merged somehow, but since PurpleAir time stamp is in a different format (its in time stamp form and AirNOW is in hour and date form), it hasn't been decided what the best option to do this is. 
+Similar to the PurpleAir dataframe - it is important to note the data frame is not yet in its final schema. Although, the data frame is now almost within 1NF. This is because all the cells contain indivisible values. Each column has a unique name. The order of the columns does not impact the data's integrity and each column contains values of a single type. 
+The data frame is not yet in 1NF. This is because the HourObserved is dependent on DateObserved. The columns of hour observed and date observed still need to be concatenated or merged somehow, but since PurpleAir time stamp is in a different format (its in time stamp form and AirNOW is in hour and date form), it hasn't been decided what the best option to do this is. 
 
 
 ## Next Steps in Data Normalization and Output File for Visualization
