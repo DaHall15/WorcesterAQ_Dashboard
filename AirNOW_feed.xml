@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+		  <channel>
+		    <title>Worcester, MA - Current Air Quality</title>
+			<link>https://www.airnow.gov/</link>
+			<description>EnviroFlash RSS Feed</description>
+			<language>en-us</language>
+			<webMaster>dmc@airnowtech.org (AIRNow Data Management Center)</webMaster>
+			<pubDate>Mon, 15 Apr 2024 12:45:02 EST</pubDate>
+			<item>			              
+				<title>Worcester, MA - Current Air Quality</title>
+			    <link>https://feeds.enviroflash.info/rss/realtime/165.xml?id=DC9FA51B-A909-2D21-D97D625711A222A5</link>
+				<description>
+					<!-- Format data output -->
+					&lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+					&lt;table style="width: 350px;"&gt;
+						&lt;tr&gt;
+							&lt;td&gt;
+								&lt;br /&gt;
+							&lt;/td&gt;
+						&lt;/tr&gt;
+						&lt;tr&gt;
+							&lt;td valign="top"&gt;
+								&lt;div&gt;&lt;b&gt;Location:&lt;/b&gt;  Worcester, MA&lt;/div&gt;&lt;br /&gt;
+								&lt;div&gt;
+									&lt;b&gt;Current Air Quality:&lt;/b&gt;
+									04/15/24 1:00 PM EDT&lt;br /&gt;&lt;br /&gt;
+									&lt;div&gt;
+										Good  - 40 AQI - Ozone&lt;br /&gt;
+											&lt;br /&gt;
+										Good  - 24 AQI - Particle Pollution (2.5 microns)&lt;br /&gt;
+											&lt;br /&gt;
+										Good  - 12 AQI - Particle Pollution (10 microns)&lt;br /&gt;
+											&lt;br /&gt;
+										
+									&lt;/div&gt;
+								&lt;/div&gt;
+								&lt;div&gt;&lt;b&gt;Agency:&lt;/b&gt; Massachusetts Dept. of Environmental Protection &lt;/div&gt;&lt;br /&gt;
+								&lt;div&gt;&lt;i&gt;Last Update: Mon, 15 Apr 2024 12:45:02 EST&lt;/i&gt;&lt;/div&gt;
+							&lt;/td&gt;
+						&lt;/tr&gt;
+					&lt;/table&gt;
+					&lt;/div&gt;
+				</description>
+			</item>
+	     </channel>
+	   </rss>

@@ -4,8 +4,12 @@
 #https://practicaldatascience.co.uk/data-science/how-to-read-an-rss-feed-in-python
 
 # Importing the packages
-import requests # package is used to make HTTP request to server to get data
-import pandas as pd # package used for data storage and manipulation
+import requests # type: ignore # package is used to make HTTP request to server to get data
+import pandas as pd # type: ignore # package used for data storage and manipulation
+
+## Importing XML reader
+#import xml.etree.ElementTree as ET #lxml library already installed with packages
+
 from requests_html import HTML # type: ignore # web-scraping library that combines beautiful soup (parsing) and requests
 from requests_html import HTMLSession # type: ignore
 # installed in command prompt
@@ -26,8 +30,97 @@ from requests_html import HTMLSession # type: ignore
         # .append is them used to append the 'row' elements to a dataframe 
         # 'df' that comtains all necessary fields
 
+
+## Example used now https://github.com/NutraSmart/python_aqi/blob/main/python_airnow.ipynb
+
+# API Key from my Clark email: 4a65bec8-f805-4394-89f8-e70e2d64c3b9
+import requests
+api_key = 'E45E0A74-20C7-4470-B4FD-22046580734E'
+
+# Creating a function -obseravtion- to get the current conditions read from the sensor in Worcester (1)
+def observation(zip_code,api_key,file_format='text/csv',dist='25'):
+    params={'format':file_format,'zipCode':zip_code,'distance':dist,'API_KEY':api_key}
+    url_airnow='https://www.airnowapi.org/aq/observation/zipcode/current/'
+
+    response = requests.get(url_airnow,params)
+    return(response.content)
+
+## Importing the necessary packages to create pandas df
+import pandas as pd
+from io import BytesIO, StringIO
+
+# Creating a dataframe from current conditions
+#using the read_csv function from pandas to read the observation csv
+    #observation is in format defined above
+observation('01608','E45E0A74-20C7-4470-B4FD-22046580734E') # printing the output of te function
+column_names  = ['O3','PM2.5','PM10']
+current_df=pd.read_csv(BytesIO(observation('01603',api_key='E45E0A74-20C7-4470-B4FD-22046580734E')))
+
+type(current_df)
+current_df.T# printing the dataframe
+
+### Data Frame Normalization 
+# Dropping rows not reporting PM2.5
+pm25_df_1 = current_df.T.iloc[:,:-1]
+pm25_df = pm25_df_1.iloc[:,1:]
+pm25_df
+
+# Dropping unnecessary columns using drop function
+pm25_norm= pm25_df.T.drop(['LocalTimeZone', 'ReportingArea','StateCode', 'CategoryNumber', 'CategoryName', 'ParameterName'], axis =1)
+pm25_norm
+
+# Adding sensor name as column
+sensor_id = ["Mass. DEP Summer Street"]
+pm25_norm.loc[:,"SensorName"]=sensor_id
+pm25_norm
+
+# Changing the order of the columns
+pm25_norm.iloc[:,[5,4,1,0,2,3]] # Need to save structure permanentley 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Defining the URL
 url = "https://feeds.airnowapi.org/rss/realtime/165.xml"
+
+# Loading the XML file 
+tree = ET.parse('')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ############### Defining get_source funciton #################
 def get_source(url):
@@ -61,7 +154,7 @@ def get_feed(url):
     df = pd.DataFrame(columns = ['title', 'pubDate', 'link', 'description']) # elements pulled changed based on XML format
 
     with response as r:
-        items = r.html.find("item", first=False)
+        items = r.find("item", first=False)
 
         for item in items:        
 

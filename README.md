@@ -12,9 +12,9 @@ Spatial Databases
 
 - APIs will be used to query live data from PurpleAir and AirNOW 
 
-- A python script will be developed to read the data into tables 
+- A python script will be developed to read the data into pandas data frames 
 
-- The mapping platform chosen for this will be mapbox.
+- The mapping platform chosen for this will be ArcGIS Online.
 
 ## Background
 - PurpleAir, AirNOW and MassDEP are the three providers of air quality sensors that provide live air quality readings to the public. 
@@ -43,6 +43,59 @@ Example code was adapted to the use of this project and is called _"AirNOW_RSS_f
 
 ## Required packages
 Make sure to download the packages required to run this code. Use the "required_packages" text file within this repo for required packages
+Run: 
+```
+pip install -r required packages.txt
+```
 
 ## CalEnviroScreen Example
 The final dashboard devleoped is aimed to emulate the basic structure of the CalEnviroScreen dashboard hosted on ArcGIS online. See the website here: https://experience.arcgis.com/experience/11d2f52282a54ceebcac7428e6184203/page/CalEnviroScreen-4_0/ 
+
+## Data Frame Normalization 
+Based on the example code that was adapted for the purposes of extracting PurpleAir and AirNOW sensor readings for Worcester, MA, live AQ sensor readings were output as pandas dataframes. 
+
+# PurpleAir data frame
+- The initial PurpleAir pandas data frame output looked like the following:
+<img width="600px" src="Images\Purple_airInitial_DF.png" alt="workflow"></img>
+- The data frame needs to be normalized and processed in order to have the same schema as the AirNOW data frame. 
+
+Steps to normalization: 
+1. Drop altitude column since it is not included in the AirNOW sensor information. 
+
+2. Add sensor names based on PurpleAir interactive map sensor names.
+
+- The resulting data frame looks like the following:
+<img width="600px" src="Images\PurpleAir_current_df.png" alt="workflow"></img>
+
+
+It is important to note the data frame is not yet in its final schema. Although, the data frame is within 1NF. This is because all the cells contain indivisible values. Each column has a unique name. The order of the columns does not impact the data's integrity and each column contains values of a single type. It has not yet been decided of whether keeping the sensor_index column is necessary.
+
+
+# AirNOW data frame
+- The initial AirNOW pandas data frame output looked like the following:
+<img width="600px" src="Images\AirNOW_initial_DF.png" alt="workflow"></img>
+- The data frame needs to be processed in order to have the same schema as the PurpleAir dataframe.
+- The initial resulting dataframe is not in 1NF because some of the columns rely on each other (reporting area and state code). Although, these dependent columns will be dropped since they are not needed and they are not contained within the PurpleAir dataframe.
+- Therefore, the following steps were taken to make the data frames for PurpleAir and AirNOW the same and to normalize both data frames. 
+
+Steps to making the data frame similar to PurpleAir:
+
+1. Drop columns that report airquality parameters that are not PM2.5. (parameters that are O3 and PM10)
+- Transpose data frame
+- Drop first and last column in dataframe
+
+2. Drop columns of Local Time Zone, Reporting Area, State, Parameter Name, CategoryName, Category Number. These columns did not provide any necessary information about the AQ reading and were not columns in the PurpleAir data frame, so they were dropped.
+
+3. Add sensor name as column and fill in value
+
+- Resulting data frame looks like the following:
+
+<img width="600px" src="Images\AirNOW_current_df.png" alt="workflow"></img>
+
+Similar to the PurpleAir dataframe - it is important to note the data frame is not yet in its final schema. Although, the data frame is now almost within 1NF. This is because all the cells contain indivisible values. Each column has a unique name. The order of the columns does not impact the data's integrity and each column contains values of a single type. THe columns of hour observed and date observed still need to be concatenated or merged somehow, but since PurpleAir time stamp is in a different format (its in time stamp form and AirNOW is in hour and date form), it hasn't been decided what the best option to do this is. 
+
+
+## Next Steps in Data Normalization and Output File for Visualization
+- The final steps of normalization above will depend on the file format that is required to visualize the air quality sensors while _still_ getting live sensor readings. 
+- I am considering exporting the pandas data frames into CSV files, though this example https://github.com/bastienwirtz/aqi_watcher/blob/master/grafana-aqi-dashboard.json includes a json file that will symboloze and classifies the PM2.5 readings. 
+- It is still desired to host this on ArcGIS Online, like CalEnviro Screen but I am still trying to figure out the connection between making sure the API is pulled from regualarly, making the code accessible, and making it so that the PM2.5 values are visualized properly on ArcGIS Online!
