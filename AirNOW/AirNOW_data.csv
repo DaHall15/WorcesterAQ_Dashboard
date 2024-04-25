@@ -1,2 +1,2 @@
-,SensorName,AQI,DateObserved,HourObserved,Latitude,Longitude,Sensor_Index
-1,Mass. DEP Summer Street,12,2024-04-22,12,42.1908,-71.8761,250270023
+SensorName,AQI,DateObserved,HourObserved,Latitude,Longitude,Sensor_Index
+Mass. DEP Summer Street,12,4/22/2024,12,42.1908,-71.8761,250270023
