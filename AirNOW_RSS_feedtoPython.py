@@ -74,13 +74,23 @@ sensor_id = ["Mass. DEP Summer Street"]
 pm25_norm.loc[:,"SensorName"]=sensor_id
 pm25_norm
 
+# Adding sensor index as a column
+sensor_index = ['250270023']
+pm25_norm.loc[:,"Sensor_Index"]=sensor_index
+pm25_norm
+
 # Changing the order of the columns
-pm25_norm.iloc[:,[5,4,1,0,2,3]] # Need to save structure permanentley 
+airnow_order = pm25_norm.iloc[:,[5,4,0,1,2,3,6]] # Need to save structure permanentley 
+airnow_order
 
 
+# Renaming the AQI column to be more descriptive
+airnow_order.rename(columns={"AQI":"PM2.5_1hourAve"},inplace = True)
+airnow_order
 
 
-
+## Exporting the CSV
+airnow_order.to_csv('AirNOW\AirNOW_data.csv')
 
 
 
