@@ -1,0 +1,55 @@
+<head>
+    <meta charset="utf-8">
+    <title>Worcester AQ Dashboard</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    
+    <!--Loading in the geojsons needed-->
+    <script src="woobounds.js"></script>
+  
+    <!-- Configuring the CSS File -->
+    <style type="text/css"> /*This is linking to the css profile within the folder*/
+      body{
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+
+
+
+  <body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <script> // Linking to the reference leaflet javascript
+    
+    // Setting up the map and its center
+      const map = L.map('map', {
+        center: [42.269769, -71.799490], 
+        zoom: 12.25});
+    // Adding the base layer - OSM Bright 
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
+         //https://tiles.stadiamaps.com/tiles/osm_bright
+        
+    // Adding a marker
+    const marker1 = L.marker([42.269769, -71.799490]).addTo(map);
+
+    // Setting Style for City Boundary
+    var boundary_style = {
+    "color": "#32B9FC",
+    "weight": 5,
+    "opacity": 0.65
+    };
+
+    // Adding the Worcester Layer from the downloaded GEoJSON
+    L.geoJSON(worcesterboundary,{
+      style : boundary_style
+    }).addTo(map)
+
+    </script>
+  </body>
+</html>

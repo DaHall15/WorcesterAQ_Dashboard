@@ -52,7 +52,7 @@ from io import BytesIO, StringIO
 # Creating a dataframe from current conditions
 #using the read_csv function from pandas to read the observation csv
     #observation is in format defined above
-observation('01608','E45E0A74-20C7-4470-B4FD-22046580734E') # printing the output of te function
+observation('01608','E45E0A74-20C7-4470-B4FD-22046580734E') # printing the output of the function
 column_names  = ['O3','PM2.5','PM10']
 current_df=pd.read_csv(BytesIO(observation('01603',api_key='E45E0A74-20C7-4470-B4FD-22046580734E')))
 
@@ -85,12 +85,13 @@ airnow_order
 
 
 # Renaming the AQI column to be more descriptive
-airnow_order.rename(columns={"AQI":"PM2.5_1hourAve"},inplace = True)
+airnow_order.rename(columns={"AQI":"PM2.5_1hourAve", "HourObserved":"TimeObserved"},inplace = True)
 airnow_order
 
 
 ## Exporting the CSV
-airnow_order.to_csv('AirNOW\AirNOW_data.csv')
+filepath_airnow = "C:/Users/danie/OneDrive/Desktop/SpatialDB_Final/WorcesterAQ_Dashboard/PurpleAir/AirNOW_data.csv"
+airnow_order.to_csv(filepath_airnow)
 
 
 
@@ -101,89 +102,3 @@ airnow_order.to_csv('AirNOW\AirNOW_data.csv')
 
 
 
-
-
-
-## Defining the URL
-url = "https://feeds.airnowapi.org/rss/realtime/165.xml"
-
-# Loading the XML file 
-tree = ET.parse('')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-############### Defining get_source funciton #################
-def get_source(url):
-    """Return the source code for the provided URL. 
-    Args: 
-        url (string): URL of the page to scrape.
-    Returns:
-        response (object): HTTP response object from requests_html. 
-    """
-
-    try:
-        session = HTMLSession()
-        response = session.get(url)
-        return response
-
-    except requests.exceptions.RequestException as e:
-        print(e)
-    # This gets the source feed itself
-
-######## This defines the get_feed function ################
-def get_feed(url):
-    """Return a Pandas dataframe containing the RSS feed contents.
-    Args: 
-        url (string): URL of the RSS feed to read.
-    Returns:
-        df (dataframe): Pandas dataframe containing the RSS feed contents.
-    """
-    
-    response = get_source(url)
-    
-    df = pd.DataFrame(columns = ['title', 'pubDate', 'link', 'description']) # elements pulled changed based on XML format
-
-    with response as r:
-        items = r.find("item", first=False)
-
-        for item in items:        
-
-            title = item.find('title', first=True).text
-            pubDate = item.find('pubDate', first=True).text
-            link = item.find('link', first=False).text #changed since different style XML than tutorial
-            description = item.find('description', first=False).text #want the info in the second descitption
-
-            row = {'title': title, 'pubDate': pubDate, 'link': link, 'description': description}
-            df = df.append(row, ignore_index=True)
-
-    return df
-
-############# Using the function #######################3
-url = "https://feeds.airnowapi.org/rss/realtime/165.xml"
-df = get_feed(url)
-
-# Testing - printing the head
-df.head()
-
-filename = "C:/Users/danie/OneDrive/Desktop/SpatialDB_Final/WorcesterAQ_Dashboard/AirNOW/airnow_dataframe.csv"
-df.to_csv(filename, encoding='utf-8')

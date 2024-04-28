@@ -203,8 +203,12 @@ purpleair_order = merged_df_norm.iloc[:,[6,3,4,5,1,2,0]] ## Need to reorder base
 purpleair_order
 
 # Changing the name of the columns to be the same as AirNOW
-purpleair_order.rename(columns={'latitude':'Latitude', 'longitude':'Longitude', 'sensor_index':'Sensor_Index', 'pm2.5_60minute':'PM2.5_1hourAve'}, inplace = True)
+purpleair_order.rename(columns={'latitude':'Latitude', 'longitude':'Longitude', 'sensor_index':'Sensor_Index', 'pm2.5_60minute':'PM2.5_1hourAve', 'Date':'DateObserved', 'Time':'TimeObserved'}, inplace = True)
 purpleair_order
 
+
 ## Exporting the CSV
-purpleair_order.to_csv('PurpleAir\purpleair_data.csv')
+filepath_purpleair = "C:/Users/danie/OneDrive/Desktop/SpatialDB_Final/WorcesterAQ_Dashboard/PurpleAir/PurpleAir_data.csv"
+purpleair_order.to_csv(filepath_purpleair)
+
+

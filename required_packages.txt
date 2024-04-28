@@ -5,3 +5,5 @@ io==4.7.5
 lxml==5.2.1
 lxml[html_clean]==0.1.1
 folium==v0.16.0
+pandas-geojson==2.1.0
+folium==0.16.1
