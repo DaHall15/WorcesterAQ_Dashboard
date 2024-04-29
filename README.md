@@ -100,3 +100,13 @@ The data frame is not yet in 1NF. This is because the HourObserved is dependent 
 - The final steps of normalization above will depend on the file format that is required to visualize the air quality sensors while _still_ getting live sensor readings. 
 - I am considering exporting the pandas data frames into CSV files, though this example https://github.com/bastienwirtz/aqi_watcher/blob/master/grafana-aqi-dashboard.json includes a json file that will symboloze and classifies the PM2.5 readings. 
 - It is still desired to host this on ArcGIS Online, like CalEnviro Screen but I am still trying to figure out the connection between making sure the API is pulled from regualarly, making the code accessible, and making it so that the PM2.5 values are visualized properly on ArcGIS Online!
+
+
+- The pandas dataframes created from reading in, processing and normalizing the AirNOW and PurpleAir API data feeds, were output as _.csv_ files. The .csv files called "AirNOW_data.csv" and "PurpleAir_data.csv" within the PurpleAir folder of the repo are the output files. 
+
+- After setting an output filepath, the output csvs are then read into a Pthyon script _AirQualityMap_visualize.html_ which is ultimately used to merge the AirNOW and PurpleAir dataframes, and then create a leaflet map that will plot live airquality points. The output leaflet map is written as an html file. 
+
+- The resulting html file that hosts the webmap locally is called _WorcesterAirQualityMap.html_. The initial result looks like the following: 
+
+
+<img width="600px" src="Images\initial_webmaphtml.png" alt="workflow"></img>

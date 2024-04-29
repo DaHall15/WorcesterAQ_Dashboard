@@ -29,7 +29,7 @@ worcesteraq_map = folium.Map(location=[42.269769, -71.799490], zoom_start=12)
 for index, row in aqsensors_df.iterrows():
     folium.CircleMarker(location=[row["Latitude"], row["Longitude"]],
                         radius=10,
-                        popup=f"{row['PM2.5_1hourAve']}: {row['SensorName']}",
+                        popup=f"{row['PM2.5_1hourAve']}: {row['SensorName']}: {row['TimeObserved']}: {row['DateObserved']}",
                         color=colormap(row['PM2.5_1hourAve']),
                         fill=True,
                         fill_color=colormap(row['PM2.5_1hourAve']),
