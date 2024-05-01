@@ -189,7 +189,7 @@ merged_df
 ###################### Normalizing the Data Frame ###############################33
 
 # Dropping Unnecessary columns
-merged_df_norm = merged_df.drop(['altitude', 'daytime', 'DateTime', 'TimeObserved','DateObserved','time_stamp'], axis =1)
+merged_df_norm = merged_df.drop(['altitude', 'daytime', 'DateTime', 'time_stamp'], axis =1)
 merged_df_norm
 
 # Add sensor name based on PurpleAir Sensor info

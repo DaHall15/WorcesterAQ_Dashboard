@@ -110,3 +110,36 @@ The data frame is not yet in 1NF. This is because the HourObserved is dependent 
 
 
 <img width="600px" src="Images\initial_webmaphtml.png" alt="workflow"></img>
+
+## Package installation notes
+The list of required_packages in the text file list all packages that need to be installed
+
+Requests is a package that needs to be installed, so is pandas
+
+The package of pandas we've been trying to install is 1.31, when i need 2.2.2..?
+
+io is just a pandas module (io==4.7.5
+)
+
+html - need a version that imports the correct modules/package? that the script references but is also inline with the version of Pandas we use. (html5lib==1.1)
+
+Do I even need the lxml since I didnt read in an lxml/rss doc for airnow? (lxml==5.2.1
+lxml[html_clean]==0.1.1)
+
+folium is a package definietely needed - it's not a module right?
+(folium==v0.16.0)
+
+pandas-geojson- is this a module or a package?
+
+pip list command within project directory to get list of all versions of packages
+
+---------------------
+After going through, realized that some of the packages were just not in the correct versions
+This is the updated list
+requests==2.31.0
+pandas==2.2.2
+folium==0.16.0
+pandas-geojson==2.1.0
+requests-html==0.10.0
+
+... is there a way to list the most updated versions within the required_packages without calling the specific versions?

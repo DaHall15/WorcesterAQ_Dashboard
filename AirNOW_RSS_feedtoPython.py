@@ -2,10 +2,9 @@
 # April 04 2024
 
 #https://practicaldatascience.co.uk/data-science/how-to-read-an-rss-feed-in-python
-
 # Importing the packages
 import requests # type: ignore # package is used to make HTTP request to server to get data
-import pandas as pd # type: ignore # package used for data storage and manipulation
+|import pandas as pd # type: ignore # package used for data storage and manipulation
 
 ## Importing XML reader
 #import xml.etree.ElementTree as ET #lxml library already installed with packages
