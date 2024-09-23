@@ -41,6 +41,7 @@ worcesteraq_map.add_child(colormap)
 
 # Adding the json of Worcester Boundary as JSON
 worcesterbounds = pd.read_json("C:/Users/danie/OneDrive/Desktop/SpatialDB_Final/WorcesterAQ_Dashboard/Dashboard_HTML/woobounds.json")
+folium.GeoJson(worcesterbounds).add_to(worcesteraq_map)
 
 # Save the map to an HTML file or display it in Jupyter Notebook
 worcesteraq_map.save('C:/Users/danie/OneDrive/Desktop/SpatialDB_Final/WorcesterAQ_Dashboard/Dashboard_HTML/WorcesterAirQualityMap.html')
